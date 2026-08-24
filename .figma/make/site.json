@@ -1,0 +1,10 @@
+{
+  "description": "Interactive digital museum showcasing the Systems Engineering program with role-based access, content exploration, gamification, and content management.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
