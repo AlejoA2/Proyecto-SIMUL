@@ -33,15 +33,15 @@ export default function Navbar() {
 
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-40 bg-[#C8102E] text-white"
-      style={{ boxShadow: '0 2px 12px rgba(200,16,46,0.3)' }}
+      className="fixed top-0 left-0 right-0 z-40 bg-[#1A1A1A] text-white"
+      style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.35)' }}
     >
       <div className="max-w-[1440px] mx-auto px-8 flex items-center justify-between h-16">
         {/* Logo */}
         <button
           onClick={() => navigate('/')}
           className="flex items-center gap-2 group"
-          aria-label="Simul - Inicio"
+          aria-label="SIMUL - Inicio"
         >
           <img
             src={logoUnilibre}
@@ -49,9 +49,9 @@ export default function Navbar() {
             className="h-10 w-auto object-contain transition-transform group-hover:scale-105"
           />
           <span style={{ fontFamily: 'Montserrat', fontWeight: 800, fontSize: 20, letterSpacing: '-0.02em' }}>
-            Simul
+            SIMUL
           </span>
-          <span className="text-red-200 text-xs font-medium hidden sm:block" style={{ fontFamily: 'Inter' }}>
+          <span className="text-simul-gold-light text-xs font-medium hidden sm:block" style={{ fontFamily: 'Inter' }}>
             Museo Digital
           </span>
         </button>
@@ -64,8 +64,8 @@ export default function Navbar() {
               onClick={() => navigate(link.path)}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                 isActive(link.path)
-                  ? 'bg-white/20 text-white'
-                  : 'text-red-100 hover:bg-white/10 hover:text-white'
+                  ? 'bg-white/15 text-white'
+                  : 'text-white/70 hover:bg-white/10 hover:text-white'
               }`}
               style={{ fontFamily: 'Montserrat' }}
             >
@@ -94,7 +94,7 @@ export default function Navbar() {
 
           <button
             onClick={() => navigate('/buscar')}
-            className="p-2 rounded-lg text-red-100 hover:bg-white/10 hover:text-white transition-colors"
+            className="p-2 rounded-lg text-white/70 hover:bg-white/10 hover:text-white transition-colors"
             title="Buscar"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">

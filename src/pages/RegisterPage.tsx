@@ -87,7 +87,7 @@ export default function RegisterPage() {
             alt="Logo Universidad Libre"
             className="h-10 w-auto object-contain transition-transform group-hover:scale-105"
           />
-          <span style={{ fontFamily: 'Montserrat', fontWeight: 800, fontSize: 22 }}>Simul</span>
+          <span style={{ fontFamily: 'Montserrat', fontWeight: 800, fontSize: 22 }}>SIMUL</span>
         </button>
 
         <div>
@@ -122,7 +122,7 @@ export default function RegisterPage() {
           <div className="lg:hidden mb-8 text-center">
             <button onClick={() => navigate('/')} className="inline-flex items-center gap-2">
               <img src={logoUnilibre} alt="Logo Universidad Libre" className="h-10 w-auto object-contain" />
-              <span style={{ color: '#C8102E', fontFamily: 'Montserrat', fontWeight: 800, fontSize: 22 }}>Simul</span>
+              <span style={{ color: '#C8102E', fontFamily: 'Montserrat', fontWeight: 800, fontSize: 22 }}>SIMUL</span>
             </button>
           </div>
 
