@@ -5,6 +5,7 @@ import ExplorePage from './pages/ExplorePage';
 import SearchPage from './pages/SearchPage';
 import ContentDetailPage from './pages/ContentDetailPage';
 import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 import StudentDashboard from './pages/StudentDashboard';
 import ProposeContentPage from './pages/ProposeContentPage';
 import MyContributionsPage from './pages/MyContributionsPage';
@@ -38,6 +39,13 @@ export const router = createBrowserRouter([
     Component: LoginRoot,
     children: [
       { index: true, Component: LoginPage },
+    ],
+  },
+  {
+    path: '/registro',
+    Component: LoginRoot,
+    children: [
+      { index: true, Component: RegisterPage },
     ],
   },
   {

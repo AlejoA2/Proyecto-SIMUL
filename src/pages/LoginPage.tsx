@@ -99,7 +99,7 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <p className="text-red-200 text-sm" style={{ fontFamily: 'Inter' }}>Universidad Libre · Programa de Ingeniería de Sistemas</p>
+        <p className="text-red-200 text-sm" style={{ fontFamily: 'Inter' }}>Universidad Libre</p>
       </div>
 
       {/* Right panel */}
@@ -194,7 +194,7 @@ export default function LoginPage() {
 
             <div className="flex items-center justify-between text-sm" style={{ fontFamily: 'Inter' }}>
               <button type="button" className="text-[#C8102E] hover:underline">¿Olvidaste tu contraseña?</button>
-              <button type="button" className="text-[#C8102E] hover:underline">Registrarse</button>
+              <button type="button" onClick={() => navigate('/registro')} className="text-[#C8102E] hover:underline">Registrarse</button>
             </div>
           </form>
         </div>
