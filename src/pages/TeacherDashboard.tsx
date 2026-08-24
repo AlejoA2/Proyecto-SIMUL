@@ -1,11 +1,16 @@
 import { useNavigate } from 'react-router';
 import { useAuth } from '../context/AuthContext';
 import { CONTENT_ITEMS } from '../data/content';
+import { useProposals } from '../context/ProposalsContext';
 
 export default function TeacherDashboard() {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { teachers, getProposalsByTeacher } = useProposals();
   if (!user) { navigate('/login'); return null; }
+
+  const currentTeacher = teachers.find(t => t.email === user.email);
+  const assignedProposals = currentTeacher ? getProposalsByTeacher(currentTeacher.id) : [];
 
   const myContent = CONTENT_ITEMS.filter((c) => c.author.includes('Patiño') || c.author.includes('Ruiz'));
   const stats = {
@@ -106,6 +111,38 @@ export default function TeacherDashboard() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Proyectos asignados como docente asesor */}
+        <div className="mt-8 simul-card p-6">
+          <h2 style={{ fontFamily: 'Montserrat', fontWeight: 700, fontSize: 18 }} className="mb-6">Proyectos asignados como docente asesor</h2>
+          {assignedProposals.length === 0 ? (
+            <div className="text-center py-8 text-gray-400" style={{ fontFamily: 'Inter' }}>
+              No tienes proyectos asignados como docente asesor aún.
+            </div>
+          ) : (
+            <div className="flex flex-col gap-3">
+              {assignedProposals.map((proposal) => (
+                <div key={proposal.id} className="flex items-center gap-4 p-4 bg-[#F9FAFB] rounded-xl">
+                  <div className="w-12 h-12 rounded-lg bg-[#C8102E]/10 flex items-center justify-center flex-shrink-0">
+                    <span className="text-xl">📋</span>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-sm text-gray-900 truncate" style={{ fontFamily: 'Montserrat' }}>{proposal.name}</p>
+                    <p className="text-xs text-gray-400" style={{ fontFamily: 'Inter' }}>
+                      {proposal.year} · {proposal.category} · Estudiante: {proposal.studentName}
+                    </p>
+                    <p className="text-xs text-gray-500 mt-1" style={{ fontFamily: 'Inter' }}>
+                      Integrantes: {proposal.members}
+                    </p>
+                  </div>
+                  <span className={`tag tag-${proposal.status}`}>
+                    {proposal.status.charAt(0).toUpperCase() + proposal.status.slice(1)}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

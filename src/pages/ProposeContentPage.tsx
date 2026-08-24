@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useAuth } from '../context/AuthContext';
+import { useProposals } from '../context/ProposalsContext';
 
 const CATEGORIES = ['Proyecto de Grado', 'Semillero de Investigación', 'Proyecto Extracurricular', 'Tesis de Maestría'];
 const TECHNOLOGIES = ['React', 'Node.js', 'Python', 'Flutter', 'Java', 'TensorFlow', 'Arduino', 'Firebase', 'PostgreSQL', 'MongoDB'];
@@ -10,6 +11,7 @@ interface FormData {
   year: string;
   category: string;
   members: string;
+  teacherId: string;
   description: string;
   technologies: string[];
   results: string;
@@ -20,6 +22,7 @@ interface FormErrors {
   year?: string;
   category?: string;
   members?: string;
+  teacherId?: string;
   description?: string;
   results?: string;
 }
@@ -27,9 +30,10 @@ interface FormErrors {
 export default function ProposeContentPage() {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { teachers, addProposal } = useProposals();
   if (!user) { navigate('/login'); return null; }
 
-  const [form, setForm] = useState<FormData>({ name: '', year: '', category: '', members: '', description: '', technologies: [], results: '' });
+  const [form, setForm] = useState<FormData>({ name: '', year: '', category: '', members: '', teacherId: '', description: '', technologies: [], results: '' });
   const [errors, setErrors] = useState<FormErrors>({});
   const [files, setFiles] = useState<{ name: string; size: string; progress: number }[]>([]);
   const [dragging, setDragging] = useState(false);
@@ -42,6 +46,7 @@ export default function ProposeContentPage() {
     if (!form.year) e.year = 'Indica el año del proyecto';
     if (!form.category) e.category = 'Selecciona una categoría';
     if (!form.members.trim()) e.members = 'Agrega al menos un integrante';
+    if (!form.teacherId) e.teacherId = 'Selecciona un docente asesor';
     if (form.description.trim().length < 50) e.description = 'La descripción debe tener al menos 50 caracteres';
     if (!form.results.trim()) e.results = 'Describe los resultados obtenidos';
     setErrors(e);
@@ -52,7 +57,23 @@ export default function ProposeContentPage() {
     e.preventDefault();
     if (!validate()) return;
     setLoading(true);
+    
+    const selectedTeacher = teachers.find(t => t.id === form.teacherId);
+    
     setTimeout(() => {
+      addProposal({
+        name: form.name,
+        year: form.year,
+        category: form.category,
+        members: form.members,
+        description: form.description,
+        technologies: form.technologies,
+        results: form.results,
+        teacherId: form.teacherId,
+        teacherName: selectedTeacher?.name || '',
+        studentName: user.name,
+        studentEmail: user.email,
+      });
       setLoading(false);
       setSuccess(true);
       setTimeout(() => navigate('/mis-aportes'), 2000);
@@ -150,6 +171,16 @@ export default function ProposeContentPage() {
               <div className="sm:col-span-2">
                 <Field label="Integrantes *" error={errors.members}>
                   <input value={form.members} onChange={set('members')} className={inputClass(errors.members)} placeholder="Nombres completos separados por coma" style={{ fontFamily: 'Inter' }} />
+                </Field>
+              </div>
+              <div className="sm:col-span-2">
+                <Field label="Docente asesor *" error={errors.teacherId}>
+                  <select value={form.teacherId} onChange={set('teacherId')} className={inputClass(errors.teacherId)} style={{ fontFamily: 'Inter' }}>
+                    <option value="">Selecciona el docente asesor</option>
+                    {teachers.map((t) => (
+                      <option key={t.id} value={t.id}>{t.name} — {t.department}</option>
+                    ))}
+                  </select>
                 </Field>
               </div>
             </div>
