@@ -52,7 +52,7 @@ export default function Navbar() {
             Simul
           </span>
           <span className="text-red-200 text-xs font-medium hidden sm:block" style={{ fontFamily: 'Inter' }}>
-            Museo Digital · Ing. Sistemas
+            Museo Digital
           </span>
         </button>
 

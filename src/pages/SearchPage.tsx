@@ -55,7 +55,7 @@ export default function SearchPage() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Buscar proyectos, premios, eventos, personas..."
-              className="w-full pl-12 pr-4 py-4 rounded-xl text-gray-900 text-base focus:outline-none focus:ring-2 focus:ring-white/50"
+              className="w-full pl-12 pr-4 py-4 bg-white rounded-xl text-gray-900 text-base placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-white/50 shadow-lg"
               style={{ fontFamily: 'Inter' }}
             />
           </div>
